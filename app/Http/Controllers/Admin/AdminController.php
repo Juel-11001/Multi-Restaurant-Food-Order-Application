@@ -84,11 +84,6 @@ class AdminController extends Controller
         $admin_data->save();
         return redirect()->route('admin.login')->with('success','Password Changed Successfully');
     }
-    public function adminRouteFile()
-    {
-        return "this is form admin route file";
-    }
-
     public function adminProfile()
     {
         $id=Auth::guard('admin')->id();

@@ -5,8 +5,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [ClientController::class, 'loginForm'])->name('login');
 Route::post('/login', [ClientController::class, 'login'])->name('login');
+Route::get('/logout', [ClientController::class, 'logout'])->name('logout');
 Route::get('/register', [ClientController::class, 'clientRegister'])->name('register');
 Route::post('/register', [ClientController::class, 'clientRegisterCreate'])->name('register.create');
+
 Route::middleware('client')->group(function () {
-   Route::get('/dashboard', [ClientController::class, 'Dashboard'])->name('dashboard'); 
+   Route::controller(ClientController::class)->group(function () {
+      Route::get('/dashboard', 'dashboard')->name('dashboard');
+      Route::get('/profile', 'profile')->name('profile');
+		Route::post('/profile/update', 'profileUpdate')->name('profile.update');
+      Route::get('profile/password-change', 'passwordChange')->name('profile.password-change');
+      Route::post('profile/password-update', 'passwordUpdate')->name('profile.password-update');
+   });
+
 });
