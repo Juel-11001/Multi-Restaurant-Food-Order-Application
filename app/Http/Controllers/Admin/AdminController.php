@@ -22,7 +22,6 @@ class AdminController extends Controller
             'email'=> 'required|email',
             'password'=> 'required'
         ]);
-        // dd($request->all());
         $check=$request->all();
         $data=['email'=>$check['email'],'password'=>$check['password']];
         if(Auth::guard('admin')->attempt($data)){
