@@ -8,30 +8,43 @@
                     <div class="d-flex flex-column h-100">
                         <div class="mb-4 mb-md-5 text-center">
                             <a href="index.html" class="d-block auth-logo">
-                                <img src="{{asset('backend/assets/images/logo-sm.svg')}}" alt="" height="28"> <span class="logo-txt">Admin Login</span>
+                                <img src="{{asset('backend/assets/images/logo-sm.svg')}}" alt="" height="28"> <span class="logo-txt">Client Register</span>
                             </a>
                         </div>
+                        
                         <div class="auth-content my-auto">
                             <div class="text-center">
                                 <h5 class="mb-0">Welcome Back !</h5>
-                                <p class="text-muted mt-2">Sign in to continue to admin.</p>
+                                <p class="text-muted mt-2">Sign in to continue to client registre.</p>
                             </div>
                             @if ($errors->any())
                             @foreach ($errors->all() as $error)
                                 <code><li>{{ $error }}</li></code>
                             @endforeach
                         @endif
-                        @if (Session::has('success'))
-                            <code><li>{{ Session::get('success') }}</li></code>
-                        @endif
                         @if (Session::has('error'))
                             <code><li>{{ Session::get('error') }}</li></code>
                         @endif
-                            <form class="mt-4 pt-2" action="{{ route('admin.login-submit') }}" method="post">
+                        @if (Session::has('message'))
+                            <code><li>{{ Session::get('message') }}</li></code>
+                        @endif
+                            <form class="mt-4 pt-2" action="{{ route('client.register.create') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
+                                    <label class="form-label">Resturant Name</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter Name" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Enter Email" name="email">
+                                    <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
                                 </div>
                                 <div class="mb-3">
                                     <div class="d-flex align-items-start">
@@ -50,6 +63,19 @@
                                         <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-grow-1">
+                                            <label class="form-label" >Confirm Password</label>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="input-group auth-pass-inputgroup">
+                                        <input type="password" class="form-control" placeholder="Enter confirm password" aria-label="Password" aria-describedby="password-addon" name="password_confirmation" id="confirm-password">
+                                        <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon-confirm"><i class="mdi mdi-eye-outline"></i></button>
+                                    </div>
+                                </div>
                                 <div class="row mb-4">
                                     <div class="col">
                                         <div class="form-check">
@@ -62,45 +88,15 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In</button>
+                                    <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register</button>
                                 </div>
                             </form>
 
-                            {{-- <div class="mt-4 pt-2 text-center">
-                                <div class="signin-other-title">
-                                    <h5 class="font-size-14 mb-3 text-muted fw-medium">- Sign in with -</h5>
-                                </div>
-
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">
-                                        <a href="javascript:void()"
-                                            class="social-list-item bg-primary text-white border-primary">
-                                            <i class="mdi mdi-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:void()"
-                                            class="social-list-item bg-info text-white border-info">
-                                            <i class="mdi mdi-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:void()"
-                                            class="social-list-item bg-danger text-white border-danger">
-                                            <i class="mdi mdi-google"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> --}}
-
                             <div class="mt-5 text-center">
-                                <p class="text-muted mb-0">Don't have an account ? <a href="auth-register.html"
+                                <p class="text-muted mb-0">Don't have an account ? <a href="{{route('client.login')}}"
                                         class="text-primary fw-semibold"> Signup now </a> </p>
                             </div>
                         </div>
-                        {{-- <div class="mt-4 mt-md-5 text-center">
-                            <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Minia   . Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
-                        </div> --}}
                     </div>
                 </div>
             </div>

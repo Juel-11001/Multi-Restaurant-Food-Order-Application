@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +39,4 @@ Route::get('admin/reset-password/{token}/{email}', [AdminController::class, 'res
 Route::post('admin/forgot-password', [AdminController::class, 'forgotPasswordSubmit'])->name('admin.forgot-password-submit');
 Route::post('admin/reset-password', [AdminController::class, 'resetPasswordSubmit'])->name('admin.reset-password-submit');
 Route::get('admin/admin-route-file', [AdminController::class, 'adminRouteFile']);
-
 
