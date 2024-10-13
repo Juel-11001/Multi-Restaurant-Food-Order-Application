@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark osahan-nav">
+@php
+   $id = Auth::user()->id;
+   $user = App\Models\User::find($id);
+@endphp
+<nav class="navbar navbar-expand-lg navbar-light bg-light osahan-nav shadow-sm">
     <div class="container">
        <a class="navbar-brand" href="{{route('home')}}"><img alt="logo" src="{{asset('frontend/img/logo.png')}}"></a>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,10 +11,10 @@
        <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
              <li class="nav-item active">
-                <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
              </li>
              <li class="nav-item">
-                <a class="nav-link" href="offers.html"><i class="icofont-sale-discount"></i> Offers <span class="badge badge-warning">New</span></a>
+                <a class="nav-link" href="offers.html"><i class="icofont-sale-discount"></i> Offers <span class="badge badge-danger">New</span></a>
              </li>
              <li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,14 +23,11 @@
              </li>
              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img alt="Generic placeholder image" src="img/user/4.png" class="nav-osahan-pic rounded-pill"> My Account
+                <img alt="Generic placeholder image" src="{{(!empty($user->image))?asset('uploads/user_profile/'.$user->image):asset('uploads/no_image.png')}}" class="nav-osahan-pic rounded-pill"> My Account
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
-                   <a class="dropdown-item" href="orders.html#orders"><i class="icofont-food-cart"></i> Orders</a>
-                   <a class="dropdown-item" href="orders.html#offers"><i class="icofont-sale-discount"></i> Offers</a>
-                   <a class="dropdown-item" href="orders.html#favourites"><i class="icofont-heart"></i> Favourites</a>
-                   <a class="dropdown-item" href="orders.html#payments"><i class="icofont-credit-card"></i> Payments</a>
-                   <a class="dropdown-item" href="orders.html#addresses"><i class="icofont-location-pin"></i> Addresses</a>
+                   <a class="dropdown-item" href="{{route('dashboard')}}"><i class="icofont-home"></i> Dashboard</a>
+                   <a class="dropdown-item" href="{{route('user.logout')}}"><i class="icofont-exit"></i> Logout</a>
                 </div>
              </li>
              <li class="nav-item dropdown dropdown-cart">
