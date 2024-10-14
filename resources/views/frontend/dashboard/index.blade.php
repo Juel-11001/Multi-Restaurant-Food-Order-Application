@@ -13,26 +13,11 @@
                 <!-- sidebar -->
                 @include('frontend.dashboard.section.sidebar')
                 <div class="col-md-9">
-                    <div class="osahan-account-page-right rounded shadow-sm bg-white p-4 h-100">
+                    <div class="osahan-account-page-right rounded shadow-sm bg-white p-4">
                         <div class="tab-content" id="myTabContent">
 
                             <!-- profile -->
                             @include('frontend.dashboard.section.profile')
-                            <!-- orders -->
-                            @include('frontend.dashboard.section.orders')
-
-                            <!-- offers -->
-                            @include('frontend.dashboard.section.offers')
-
-                            <!-- favourite -->
-                            @include('frontend.dashboard.section.favourite')
-
-                            <!-- payment -->
-                            @include('frontend.dashboard.section.payment')
-
-                            <!-- address -->
-                            @include('frontend.dashboard.section.address')
-
                         </div>
                     </div>
                 </div>

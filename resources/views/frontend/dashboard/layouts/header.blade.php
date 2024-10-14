@@ -26,7 +26,7 @@
                 <img alt="Generic placeholder image" src="{{(!empty($user->image))?asset('uploads/user_profile/'.$user->image):asset('uploads/no_image.png')}}" class="nav-osahan-pic rounded-pill"> My Account
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
-                   <a class="dropdown-item" href="{{route('dashboard')}}"><i class="icofont-home"></i> Dashboard</a>
+                   <a class="dropdown-item" href="{{route('home')}}"><i class="icofont-home"></i> Home</a>
                    <a class="dropdown-item" href="{{route('user.logout')}}"><i class="icofont-exit"></i> Logout</a>
                 </div>
              </li>

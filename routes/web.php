@@ -16,6 +16,8 @@ Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->middle
 Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
 	Route::post('/profile', [UserDashboardController::class, 'update'])->name('profile.update');
 	Route::get('/profile', [UserDashboardController::class, 'destroy'])->name('logout');
+	Route::get('/change/password', [UserDashboardController::class, 'changePassword'])->name('change.password');
+	Route::post('/update/password', [UserDashboardController::class, 'updatePassword'])->name('update.password');
 });
 
 require __DIR__.'/auth.php';

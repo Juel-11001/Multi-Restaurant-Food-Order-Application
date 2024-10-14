@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserDashboardController extends Controller
 {
@@ -59,4 +60,37 @@ class UserDashboardController extends Controller
 
         return redirect('/')->with($notification);
     } 
+    public function updatePassword(Request $request)
+    {
+        // dd($request->all());
+        $user=Auth::guard('web')->user();
+        $request->validate([
+            'old_password'=> 'required',
+            'new_password'=> 'required|min:8|confirmed',
+        ]);
+
+        if(!Hash::check($request->old_password, $user->password)){
+            $notification=array(
+                'message'=>'Old Password not match',
+                'alert-type'=>'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        
+        //user password update:
+
+        User::where('id', $user->id)->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+        $notification=array(
+            'message'=>'Password Changed Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification)->withFragment('change-password');
+
+    } 
+    public function changePassword()
+    {
+        return view('frontend.dashboard.section.change-password');
+    }
 }
