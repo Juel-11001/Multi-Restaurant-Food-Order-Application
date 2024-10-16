@@ -23,15 +23,15 @@ Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
 require __DIR__.'/auth.php';
 
 /** admin routes */
-Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
-	Route::controller(AdminController::class)->group(function () {
-		Route::get('/dashboard', 'dashboard')->name('dashboard');
-		Route::get('/profile', 'adminProfile')->name('profile');
-		Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
-        Route::get('profile/password-change', 'adminPasswordChange')->name('profile.password-change');
-        Route::post('profile/password-update', 'adminPasswordUpdate')->name('profile.password-update');
-	});
-});
+// Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
+// 	Route::controller(AdminController::class)->group(function () {
+// 		Route::get('/dashboard', 'dashboard')->name('dashboard');
+// 		Route::get('/profile', 'adminProfile')->name('profile');
+// 		Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
+//         Route::get('profile/password-change', 'adminPasswordChange')->name('profile.password-change');
+//         Route::post('profile/password-update', 'adminPasswordUpdate')->name('profile.password-update');
+// 	});
+// });
 
 Route::post('admin/login', [AdminController::class, 'adminLoginSubmit'])->name('admin.login-submit');
 Route::get('admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
@@ -39,5 +39,4 @@ Route::get('admin/forgot-password', [AdminController::class, 'forgotPassword'])-
 Route::get('admin/reset-password/{token}/{email}', [AdminController::class, 'resetPassword']);
 Route::post('admin/forgot-password', [AdminController::class, 'forgotPasswordSubmit'])->name('admin.forgot-password-submit');
 Route::post('admin/reset-password', [AdminController::class, 'resetPasswordSubmit'])->name('admin.reset-password-submit');
-Route::get('admin/admin-route-file', [AdminController::class, 'adminRouteFile']);
 
