@@ -23,6 +23,19 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript: void(0);" class="has-arrow">
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Cities</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li>
+                    <a href="{{ route('admin.city.index') }}">
+                        <span data-key="t-calendar">City</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <li>
             <a href="javascript: void(0);" class="has-arrow">

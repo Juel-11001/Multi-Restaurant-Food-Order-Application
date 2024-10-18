@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CityController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AdminController::class)->group(function () {
@@ -14,3 +15,7 @@ Route::controller(AdminController::class)->group(function () {
 /** category route */
 Route::put('/category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
 Route::resource('category', CategoryController::class);
+
+/** city route */
+Route::put('/city/change-status', [CityController::class, 'changeStatus'])->name('city.change-status');
+Route::resource('city', CityController::class);
