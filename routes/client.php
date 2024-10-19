@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\ClientController;
-use App\Http\Controllers\Client\MenuController;
+use App\Http\Controllers\Backend\ClientController;
+use App\Http\Controllers\Backend\MenuController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [ClientController::class, 'loginForm'])->name('login');

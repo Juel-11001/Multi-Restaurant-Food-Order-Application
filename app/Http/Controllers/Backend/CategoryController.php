@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -141,4 +141,5 @@ class CategoryController extends Controller
 
         return response(['message'=>'Status has been Updated!']);
     }
+    
 }

@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserDashboardController;
-use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -39,4 +38,4 @@ Route::get('admin/forgot-password', [AdminController::class, 'forgotPassword'])-
 Route::get('admin/reset-password/{token}/{email}', [AdminController::class, 'resetPassword']);
 Route::post('admin/forgot-password', [AdminController::class, 'forgotPasswordSubmit'])->name('admin.forgot-password-submit');
 Route::post('admin/reset-password', [AdminController::class, 'resetPasswordSubmit'])->name('admin.reset-password-submit');
-
+Route::get('admin/show', [AdminController::class, 'show'])->name('admin.show');

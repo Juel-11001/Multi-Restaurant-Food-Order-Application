@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CityController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AdminController::class)->group(function () {
