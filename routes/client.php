@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Client\MenuController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [ClientController::class, 'loginForm'])->name('login');
@@ -18,4 +19,7 @@ Route::middleware('client')->group(function () {
       Route::post('profile/password-update', 'passwordUpdate')->name('profile.password-update');
    });
 
+   /** menu route */
+   Route::put('/menu/change-status', [MenuController::class, 'changeStatus'])->name('menu.change-status');
+   Route::resource('menu', MenuController::class);
 });
