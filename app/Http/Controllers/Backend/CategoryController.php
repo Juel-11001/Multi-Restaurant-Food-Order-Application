@@ -40,28 +40,6 @@ class CategoryController extends Controller
             'image'=>'required|mimes:jpg,png,jpeg,svg,webp,gif|max:5120',
             'status'=>'required',
         ]);
-        // // dd($validate);
-        // $imagePath=$this->uploadImage($request, 'image', 'uploads/category');
-        // Category::create([
-        //     'name'=>$request->name,
-        //     'slug'=>Str::slug($request->name),
-        //     'image'=>$imagePath,
-        //     'status'=>$request->status
-        // ]);
-        // if($request->file('image')){
-        //   $image=$request->file('image');
-        //   $manager= new ImageManager(new Driver());
-        //   $name_gen= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        //   $img=$manager->read($image);
-        //   $img->resize(300,300)->save('uploads/category/'.$name_gen);
-        //   $save_url='uploads/category/'.$name_gen;
-        //   Category::create([
-        //     'name'=>$request->name,
-        //     'slug'=>Str::slug($request->name),
-        //     'image'=>$save_url,
-        //     'status'=>$request->status
-        //   ]);
-        // }
         $imagePath = $this->uploadImage($request, 'image', 'uploads/category');
         Category::create([
             'name' => $request->name,

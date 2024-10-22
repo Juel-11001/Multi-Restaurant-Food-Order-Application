@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 // use App\Http\Controllers\ProfileController;
@@ -21,21 +22,25 @@ Route::middleware('auth')->prefix('user')->as('user.')->group(function () {
 
 require __DIR__.'/auth.php';
 
-/** admin routes */
-// Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
-// 	Route::controller(AdminController::class)->group(function () {
-// 		Route::get('/dashboard', 'dashboard')->name('dashboard');
-// 		Route::get('/profile', 'adminProfile')->name('profile');
-// 		Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
-//         Route::get('profile/password-change', 'adminPasswordChange')->name('profile.password-change');
-//         Route::post('profile/password-update', 'adminPasswordUpdate')->name('profile.password-update');
-// 	});
-// });
+/** admin route */
+Route::prefix('admin')->as('admin.')->group(function () {
+	Route::controller(AdminController::class)->group(function () {
+		Route::post('admin/login', 'adminLoginSubmit')->name('login-submit');
+		Route::get('admin/logout', 'adminLogout')->name('logout');
+		Route::get('admin/forgot-password', 'forgotPassword')->name('forgot-password');
+		Route::get('admin/reset-password/{token}/{email}', 'resetPassword');
+		Route::post('admin/forgot-password', 'forgotPasswordSubmit')->name('forgot-password-submit');
+		Route::post('admin/reset-password', 'resetPasswordSubmit')->name('reset-password-submit');
+	});
+});
 
-Route::post('admin/login', [AdminController::class, 'adminLoginSubmit'])->name('admin.login-submit');
-Route::get('admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
-Route::get('admin/forgot-password', [AdminController::class, 'forgotPassword'])->name('admin.forgot-password');
-Route::get('admin/reset-password/{token}/{email}', [AdminController::class, 'resetPassword']);
-Route::post('admin/forgot-password', [AdminController::class, 'forgotPasswordSubmit'])->name('admin.forgot-password-submit');
-Route::post('admin/reset-password', [AdminController::class, 'resetPasswordSubmit'])->name('admin.reset-password-submit');
-Route::get('admin/show', [AdminController::class, 'show'])->name('admin.show');
+/** client route */
+Route::prefix('client')->as('client.')->group(function () {
+	Route::controller(ClientController::class)->group(function () {
+		Route::get('/login', 'loginForm')->name('login');
+		Route::post('/login', 'login')->name('login');
+		Route::get('/logout', 'logout')->name('logout');
+		Route::get('/register', 'clientRegister')->name('register');
+		Route::post('/register', 'clientRegisterCreate')->name('register.create');
+	});
+});
