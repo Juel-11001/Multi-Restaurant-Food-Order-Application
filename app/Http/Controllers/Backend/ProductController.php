@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         $products=Product::latest()->get();
-        return view('client.product.index', compact('products'));
+        return view('client.product.in', compact('products'));
     }
 
     /**
@@ -107,7 +107,7 @@ class ProductController extends Controller
         $menus=Menu::where('status', 1)->get();
         $cities=City::where('status', 1)->get();
         $categories=Category::where('status', 1)->get();
-        return view('client.product.edit', compact('product', 'menus', 'cities', 'categories'));
+        return view('client.product.edi', compact('product', 'menus', 'cities', 'categories'));
     }
 
     /**

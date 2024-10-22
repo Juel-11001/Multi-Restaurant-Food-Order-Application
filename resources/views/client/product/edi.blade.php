@@ -1,5 +1,5 @@
 @extends('client.layouts.master')
-{{-- @section('title', 'Create New Product') --}}
+@section('title', 'Update Product')
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
