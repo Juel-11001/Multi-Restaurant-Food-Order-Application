@@ -54,7 +54,7 @@
                                                 $discount=($product->discount_price/$product->price)*100;
                                                 // dd($discount);
                                             @endphp
-                                            <span class="badge bg-success" style="font-size: 13px">{{($discount)}}%</span>
+                                            <span class="badge bg-success" style="font-size: 13px">{{round($discount)}}%</span>
                                         @else
                                             <span class="badge bg-danger" style="font-size: 13px">0%</span>
                                         @endif

@@ -22,6 +22,10 @@ trait imageUploadTrait
     {
         if ($request->file($imageField)) {
             $image = $request->file($imageField);
+            
+            $width = $width ?: 300; 
+            $height = $height ?: 300;
+
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             $manager = new ImageManager(new Driver());
             $img = $manager->read($image);
@@ -35,6 +39,23 @@ trait imageUploadTrait
     {
         if (file_exists(public_path($path))) {
             unlink(public_path($path));
+        }
+    }
+
+    /** mulitple image upload */
+    public function uploadMultiImage(Request $request, $inputName, $directory, $width = 500, $height = 500) {
+        $imagepaths=[];
+        if($request->hasFile($inputName)){
+            $images=$request->{$inputName};
+            foreach ($images as $image) {
+                $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+                $manager = new ImageManager(new Driver());
+                $img = $manager->read($image);
+                $img->resize($width, $height)->save($directory . '/' . $name_gen);
+                $imagepaths[] = $directory . '/' . $name_gen;
+            }
+            return $imagepaths;
+
         }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\ClientController;
+use App\Http\Controllers\Backend\ImageGalleryController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,6 @@ Route::resource('menu', MenuController::class);
 /** product route */
 Route::put('/product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
 Route::resource('product', ProductController::class);
+
+/** image gallery route */
+Route::resource('gallery', ImageGalleryController::class);

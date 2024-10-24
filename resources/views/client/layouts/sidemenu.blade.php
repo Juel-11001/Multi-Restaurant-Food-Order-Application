@@ -45,7 +45,7 @@
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li>
-                    <a href="{{route('client.product.index')}}">
+                    <a href="{{route('client.gallery.index')}}">
                         <span data-key="t-calendar">All Gellery</span>
                     </a>
                 </li>
