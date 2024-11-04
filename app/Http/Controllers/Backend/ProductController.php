@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Str;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     use imageUploadTrait;
     /**
@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::latest()->get();
+        $products=Product::where('client_id', $this->user_id)->orderBy('id', 'desc')->latest()->get();
         return view('client.product.in', compact('products'));
     }
 
@@ -103,7 +103,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product=Product::find($id);
+        $product=Product::where('client_id', $this->user_id)->find($id);
         $menus=Menu::where('status', 1)->get();
         $cities=City::where('status', 1)->get();
         $categories=Category::where('status', 1)->get();
@@ -138,7 +138,7 @@ class ProductController extends Controller
             'image.max' => 'Image Size Must Be Less Than 5 MB',
         ]);
         
-        $product=Product::findOrFail($id);
+        $product=Product::where('client_id', $this->user_id)->findOrFail($id);
 
         if ($request->file('image')) {
             $this->deleteImage($product->image);
@@ -172,14 +172,14 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product=Product::find($id);
+        $product=Product::where('client_id', $this->user_id)->find($id);
         $this->deleteImage($product->image);
         $product->delete();
         return response(['status' => 'success','message' => 'Product Deleted Successfully']);
     }
     public function changeStatus(Request $request)
     {
-        $product=Product::findOrFail($request->id);
+        $product=Product::where('client_id', $this->user_id)->findOrFail($request->id);
         $product->status=$request->status == 'true' ? 1 : 0 ;
         $product->save();
 
