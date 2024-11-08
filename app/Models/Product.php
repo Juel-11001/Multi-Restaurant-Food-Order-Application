@@ -14,4 +14,8 @@ class Product extends Model
     {
         return $this->belongsTo(Menu::class);
     }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }
