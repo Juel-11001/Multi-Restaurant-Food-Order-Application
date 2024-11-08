@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Traits\imageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class MenuController extends Controller
+class MenuController extends BaseController
 {
     use imageUploadTrait;
     /**
@@ -15,7 +16,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus=Menu::latest()->get();
+        // $client_id=Auth::guard('client')->id();
+        $menus=Menu::where('client_id', $this->user_id)->orderBy('id', 'desc')->latest()->get();
         return view('client.menu.index', compact('menus'));
     }
 
@@ -35,14 +37,15 @@ class MenuController extends Controller
         // dd($request->all());
         $request->validate([
             'name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
             'status' => 'required',
         ]);
         $imagePath = $this->uploadImage($request, 'image', 'uploads/menu');
         Menu::create([
             'name' => $request->name,
             'image' => $imagePath,
-            'status' => $request->status
+            'status' => $request->status,
+            'client_id' => Auth::guard('client')->id(),
         ]);
         $notification=array(
             'message'=>'Category Created Successfully',
@@ -64,7 +67,9 @@ class MenuController extends Controller
      */
     public function edit(string $id)
     {
-        $menu=Menu::find($id);
+        // $client_id=Auth::guard('client')->id();
+        // $menu=Menu::find($id);
+        $menu=Menu::where('client_id', $this->user_id)->findOrFail($id);
         return view('client.menu.edit', compact('menu'));
     }
 
@@ -73,7 +78,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $menu=Menu::findOrFail($id);
+        $menu=Menu::where('client_id', $this->user_id)->findOrFail($id);
 
         $validate=$request->validate([
             'name' => 'max:250',
@@ -89,7 +94,8 @@ class MenuController extends Controller
         $menu->update([
             'name' => $request->name,
             'image' => $imagePath,
-            'status' => $request->status
+            'status' => $request->status,
+            'client_id' => Auth::guard('client')->id(),
         ]);
         $notification = [
             'message' => 'Category Updated Successfully',
@@ -103,7 +109,7 @@ class MenuController extends Controller
      */
     public function destroy(string $id)
     {
-        $menu=Menu::find($id);
+        $menu=Menu::where('client_id', $this->user_id)->findOrFail($id);
         $this->deleteImage($menu->image);
         $menu->delete();
         return response(['status' => 'success','message' => 'Menu Deleted Successfully']);
@@ -111,7 +117,7 @@ class MenuController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $menu=Menu::findOrFail($request->id);
+        $menu=Menu::where('client_id', $this->user_id)->findOrFail($request->id);
         $menu->status=$request->status == 'true' ? 1 : 0 ;
         $menu->save();
 

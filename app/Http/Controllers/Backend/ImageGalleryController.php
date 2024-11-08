@@ -8,7 +8,7 @@ use App\Traits\imageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ImageGalleryController extends Controller
+class ImageGalleryController extends BaseController
 {
     use imageUploadTrait;
     /**
@@ -16,7 +16,7 @@ class ImageGalleryController extends Controller
      */
     public function index()
     {
-        $imageGalleries = ImageGallery::latest()->get();
+        $imageGalleries = ImageGallery::where('client_id', $this->user_id)->latest()->get();
         return view('client.product.image-gallery.index', compact('imageGalleries'));
     }
 
@@ -63,7 +63,7 @@ class ImageGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        $imageGallery = ImageGallery::findOrFail($id);
+        $imageGallery = ImageGallery::where('client_id', $this->user_id)->findOrFail($id);
         return view('client.product.image-gallery.edit', compact('imageGallery'));
     }
 
@@ -75,7 +75,7 @@ class ImageGalleryController extends Controller
         $request->validate([
             'image' => 'nullable|image|max:5120',
         ]);
-        $imageGallery = ImageGallery::findOrFail($id);
+        $imageGallery = ImageGallery::where('client_id', $this->user_id)->findOrFail($id);
         if ($request->file('image')) {
             $this->deleteImage($imageGallery->image);
             $imagePath = $this->uploadImage($request, 'image', 'uploads/image-gallery', 500,500);
@@ -97,7 +97,7 @@ class ImageGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        $imageGallery = ImageGallery::findOrFail($id);
+        $imageGallery = ImageGallery::where('client_id', $this->user_id)->findOrFail($id);
         $this->deleteImage($imageGallery->image);
         $imageGallery->delete();
         return response(['status' => 'success','message' => 'Image Gallery Deleted Successfully']);

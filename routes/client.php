@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\ClientController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ImageGalleryController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\ProductController;
@@ -24,3 +25,16 @@ Route::resource('product', ProductController::class);
 
 /** image gallery route */
 Route::resource('gallery', ImageGalleryController::class);
+
+/** coupon route */
+Route::prefix('coupon')->as('coupon.')->group(function () {
+   Route::controller(CouponController::class)->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/create', 'create')->name('create');
+      Route::post('/store', 'store')->name('store');
+      Route::get('/edit/{id}', 'edit')->name('edit');
+      Route::post('/update', 'update')->name('update');
+      Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+      Route::put('/change-status', 'changeStatus')->name('change-status');
+   });
+});
