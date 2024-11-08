@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminManageProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CityController;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,6 @@ Route::resource('category', CategoryController::class);
 /** city route */
 Route::put('/city/change-status', [CityController::class, 'changeStatus'])->name('city.change-status');
 Route::resource('city', CityController::class);
+
+/** manger prduct route */
+Route::resource('manage-product', AdminManageProductController::class);
