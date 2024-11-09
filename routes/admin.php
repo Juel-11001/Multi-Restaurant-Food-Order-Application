@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminManageProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CityController;
+use App\Http\Controllers\Backend\ManageRestaurantUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AdminController::class)->group(function () {
@@ -23,3 +24,10 @@ Route::resource('city', CityController::class);
 
 /** manger prduct route */
 Route::resource('manage-product', AdminManageProductController::class);
+
+/** manage restaurant user */
+Route::controller(ManageRestaurantUserController::class)->group(function () {
+   Route::get('/manage-restaurant-user-list', 'index')->name('manage-restaurant-user.list');
+   Route::get('/manage-restaurant-user-pending', 'pendingUsers')->name('manage-restaurant-user.pending');
+   Route::put('/manage-restaurant-user-change-status', 'changeStatus')->name('manage-restaurant-user.change-status');
+});

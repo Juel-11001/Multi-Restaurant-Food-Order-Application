@@ -48,6 +48,26 @@
                         <span data-key="t-calendar">Products</span>
                     </a>
                 </li>
+                
+            </ul>
+        </li>
+        <li>
+            <a href="javascript: void(0);" class="has-arrow">
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Manage Users</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li>
+                    <a href="{{ route('admin.manage-restaurant-user.list') }}">
+                        <span data-key="t-calendar">All Resturants</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.manage-restaurant-user.pending') }}">
+                        <span data-key="t-calendar">Pending Resturants</span>
+                    </a>
+                </li>
+                
             </ul>
         </li>
 
