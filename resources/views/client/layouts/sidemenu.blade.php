@@ -1,3 +1,8 @@
+@php
+    $client_id=Auth::guard('client')->id();
+    $client = App\Models\Client::find($client_id);
+    $status=$client->status;
+@endphp
 <div id="sidebar-menu">
     <!-- Left Menu Start -->
     <ul class="metismenu list-unstyled" id="side-menu">
@@ -9,7 +14,7 @@
                 <span data-key="t-dashboard">Dashboard</span>
             </a>
         </li>
-
+        @if ($status==1)    
         <li>
             <a href="javascript: void(0);" class="has-arrow">
                 <i data-feather="grid"></i>
@@ -66,6 +71,7 @@
 
             </ul>
         </li>
+        @endif
 
         {{-- <li>
             <a href="javascript: void(0);" class="has-arrow">

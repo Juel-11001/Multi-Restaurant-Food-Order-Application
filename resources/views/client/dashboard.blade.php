@@ -1,7 +1,18 @@
 @extends('client.layouts.master')
 @section('content')
+@php
+    $client_id=Auth::guard('client')->id();
+    $client = App\Models\Client::find($client_id);
+    $status=$client->status;
+@endphp
 <div class="page-content">
     <div class="container-fluid">
+        @if ($status==1)
+        <h2>welcome to your dashboard</h2>
+        @else
+        <h2>Your account is blocked <span class="text-danger">by admin</span></h2>
+        <p class="text-danger">please contact with admin or wait for admin approval</p>
+        @endif
 
         <!-- start page title -->
         <div class="row">
@@ -20,7 +31,6 @@
             </div>
         </div>
         <!-- end page title -->
-
         <div class="row">
             <div class="col-xl-3 col-md-6">
                 <!-- card -->

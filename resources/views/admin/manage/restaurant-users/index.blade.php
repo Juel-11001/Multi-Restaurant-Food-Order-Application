@@ -36,10 +36,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users  as $user)    
+                                @foreach ($users as $user)    
                                 <tr>
                                     <td>{{$loop->index+1}}</td>
-                                    <td><img src="{{asset($user->image)}}" alt="{{$user->name}}" width="70px" height="40px" ></td>
+                                    <td><img src="{{!empty($user->image) ? url('uploads/client_profile/'.$user->image) : url('uploads/no_image.jpg')}}" alt="{{$user->name}}" width="60px" height="50px"></td>
                                     <td>{{limitText($user->name, 60)}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->phone}}</td>

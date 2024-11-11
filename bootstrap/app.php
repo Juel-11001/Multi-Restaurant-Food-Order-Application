@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['web', 'client'])
+            Route::middleware(['web', 'client',])
             ->prefix('client')
             ->name('client.')
             ->group(base_path('routes/client.php'));
@@ -26,6 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\Admin::class,
             'client' => \App\Http\Middleware\Client::class,
+            'clientStatus' => \App\Http\Middleware\ClientStatus::class
         ]);
         
     })
