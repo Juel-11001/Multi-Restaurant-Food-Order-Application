@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminManageProductController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\ManageRestaurantUserController;
@@ -31,3 +32,6 @@ Route::controller(ManageRestaurantUserController::class)->group(function () {
    Route::get('/manage-restaurant-user-pending', 'pendingUsers')->name('manage-restaurant-user.pending');
    Route::put('/manage-restaurant-user-change-status', 'changeStatus')->name('manage-restaurant-user.change-status');
 });
+/** manage banner route */
+Route::put('/manage-banner/change-status', [BannerController::class, 'changeStatus'])->name('manage-banner.change-status');
+Route::resource('manage-banner', BannerController::class);
