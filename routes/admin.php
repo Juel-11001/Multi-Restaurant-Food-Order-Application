@@ -28,9 +28,9 @@ Route::resource('manage-product', AdminManageProductController::class);
 
 /** manage restaurant user */
 Route::controller(ManageRestaurantUserController::class)->group(function () {
-   Route::get('/manage-restaurant-user-list', 'index')->name('manage-restaurant-user.list');
-   Route::get('/manage-restaurant-user-pending', 'pendingUsers')->name('manage-restaurant-user.pending');
-   Route::put('/manage-restaurant-user-change-status', 'changeStatus')->name('manage-restaurant-user.change-status');
+    Route::get('/manage-restaurant-user-list', 'index')->name('manage-restaurant-user.list');
+    Route::get('/manage-restaurant-user-pending', 'pendingUsers')->name('manage-restaurant-user.pending');
+    Route::put('/manage-restaurant-user-change-status', 'changeStatus')->name('manage-restaurant-user.change-status');
 });
 /** manage banner route */
 Route::put('/manage-banner/change-status', [BannerController::class, 'changeStatus'])->name('manage-banner.change-status');
